@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/autoloader.php';
+require 'autoloader.php';
 //require('db_connection.php');
 
 use Core\Router;
@@ -16,21 +16,34 @@ use Components\Footer;
 //CloseCon($conn);
 //
 //echo "DB connect\n";
-
-$route = new Router();
-
-Header::view();
-
-$route->get('/', function () {
-    HomePage::view();
-});
-
-$route->get('/addproduct', function () {
-    AddProduct::view();
-});
-
-Footer::view();
-
 ?>
 
-<input type="button" onclick="location.href='<?php echo SITE_URL; ?>/addproduct';" value="Go to Add Product page" />
+<!DOCTYPE html>
+<html>
+
+    <body class="mt-4 border-0 bd-example">
+
+        <!-- BODY -->
+        <?php
+
+        #HEADER
+        Header::view();
+
+        $route = new Router();
+
+        $route->get('/', function () {
+            HomePage::view();
+        });
+
+        $route->get('/addproduct', function () {
+            AddProduct::view();
+        });
+
+        #FOOTER
+        Footer::view();
+
+        ?>
+
+    </body>
+</html>
+

@@ -19,6 +19,6 @@ class Model {
 
     public function getAll() {
         //TODO
-        echo "GET ALL";
+        return "GET ALL";
     }
 }
