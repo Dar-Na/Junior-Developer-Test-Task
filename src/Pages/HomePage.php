@@ -13,6 +13,11 @@ class HomePage {
         <?php
 
         echo 'HOME PAGE!';
-        echo (new Model()) ->getAll();
+        $result = (new Model()) ->getAll();
+
+        while ($row = $result->fetch_assoc()) {
+            echo $row['product_type'];
+            echo implode(", ", $row) . "<br>";
+        }
     }
 }
