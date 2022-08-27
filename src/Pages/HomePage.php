@@ -2,27 +2,27 @@
 
 namespace Pages;
 
+use Components\Card;
 use Core\Model;
 
 
 class HomePage {
+
+/*<input type="button" onclick="location.href='<?php echo SITE_URL; ?>/addproduct';" value="Go to Add Product page" />*/
+
     public static function view() {    ?>
-
-        <input type="button" onclick="location.href='<?php echo SITE_URL; ?>/addproduct';" value="Go to Add Product page" />
-
-        <?php
-
-        echo 'HOME PAGE!';
-        $result = (new Model()) ->getAll();
-
-        while ($row = $result->fetch_assoc()) {
-            echo $row['product_type']; ?>
-            <div class="container">
-                <?php
-                echo implode(", ", $row) . "<br>";
-                ?>
-            </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-1">
             <?php
-        }
+
+            $result = (new Model()) ->getAll();
+
+            while ($row = $result->fetch_assoc()) {
+                $card = new Card($row['product_type'], $row);
+                echo $card->view();
+            }
+
+            ?>
+        </div>
+        <?php
     }
 }

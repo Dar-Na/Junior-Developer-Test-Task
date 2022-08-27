@@ -21,7 +21,7 @@ use Components\Footer;
 <!DOCTYPE html>
 <html>
 
-    <body class="mt-4 border-0 bd-example">
+    <body class="mt-4 border-0 bd-example m-5">
 
         <!-- BODY -->
         <?php

@@ -33,7 +33,7 @@ class Model {
         $this->isExistTable("furniture");
 
 //        $this->insertProduct('Jhasdo1', 'furniture for all', 214, 'furniture', null, null, 13, 42, 52);
-//        $this->insertProduct('JO12354', "good book", 423, 'book', 423);
+//        $this->insertProduct('JO1235244', "good book", 423, 'book', 54308);
     }
 
     private function createTable($table) {
