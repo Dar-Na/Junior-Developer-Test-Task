@@ -16,8 +16,13 @@ class HomePage {
         $result = (new Model()) ->getAll();
 
         while ($row = $result->fetch_assoc()) {
-            echo $row['product_type'];
-            echo implode(", ", $row) . "<br>";
+            echo $row['product_type']; ?>
+            <div class="container">
+                <?php
+                echo implode(", ", $row) . "<br>";
+                ?>
+            </div>
+            <?php
         }
     }
 }
