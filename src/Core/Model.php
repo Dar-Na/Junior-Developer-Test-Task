@@ -17,6 +17,7 @@ class Model {
         );
 
         mysqli_report(MYSQLI_REPORT_OFF);
+
         # id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         # sku VARCHAR(64) NOT NULL UNIQUE,
         # product_name VARCHAR(80) NOT NULL,
@@ -32,8 +33,10 @@ class Model {
         $this->isExistTable("book");
         $this->isExistTable("furniture");
 
-//        $this->insertProduct('Jhasdo1', 'furniture for all', 214, 'furniture', null, null, 13, 42, 52);
-//        $this->insertProduct('JO1235244', "good book", 423, 'book', 54308);
+//        $this->insertProduct('26357467', 'dvd', 13, 'dvd', null, 13);
+//        $this->insertProduct('Jh434563asdo1', 'furnitu465re for all', 56214, 'furniture', null, null, 13, 42, 52);
+//        $this->insertProduct('143', 'furnitur35767e for all', 214, 'furniture', null, null, 13, 42, 52);
+//        $this->insertProduct('JO123523444', "good book", 423, 'book', 54308);
     }
 
     private function createTable($table) {
@@ -66,8 +69,7 @@ class Model {
 
         if ($table === "all_products") {
             $sql = $sql . "CREATE TABLE all_products (
-                        id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-                        sku VARCHAR(64) UNIQUE NOT NULL,
+                        sku VARCHAR(64) PRIMARY KEY UNIQUE NOT NULL,
                         product_name VARCHAR(80) NOT NULL,
                         price FLOAT NOT NULL,
                         product_type VARCHAR(64) NOT NULL,
@@ -113,15 +115,14 @@ class Model {
                 while ($row = $result->fetch_assoc()) {
                     $maxId = (int)implode(", ", $row);
                     $sql = "INSERT INTO `all_products`
-                            (`id`,
-                             `sku`,
+                            (`sku`,
                              `product_name`,
                              `price`,
                              `product_type`,
                              `id_book`,
                              `id_dvd`,
                              `id_furniture`)
-                        VALUES (NULL, '"
+                        VALUES ('"
                                 . $sku . "', '"
                                 . $product_name. "', '"
                                 . $price . "', '"
@@ -139,15 +140,14 @@ class Model {
                 while ($row = $result->fetch_assoc()) {
                     $maxId = (int)implode(", ", $row);
                     $sql = "INSERT INTO `all_products` 
-                            (`id`, 
-                             `sku`, 
+                            (`sku`, 
                              `product_name`, 
                              `price`, 
                              `product_type`, 
                              `id_book`, 
                              `id_dvd`, 
                              `id_furniture`) 
-                        VALUES (NULL, '"
+                        VALUES ('"
                                 . $sku . "', '"
                                 . $product_name. "', '"
                                 . $price . "', '"
@@ -172,15 +172,14 @@ class Model {
                 while ($row = $result->fetch_assoc()) {
                     $maxId = (int)implode(", ", $row);
                     $sql = "INSERT INTO `all_products` 
-                            (`id`, 
-                             `sku`, 
+                            (`sku`, 
                              `product_name`, 
                              `price`, 
                              `product_type`, 
                              `id_book`, 
                              `id_dvd`, 
                              `id_furniture`) 
-                        VALUES (NULL, '"
+                        VALUES ('"
                                 . $sku . "', '"
                                 . $product_name. "', '"
                                 . $price . "', '"
@@ -195,6 +194,9 @@ class Model {
 
         if ($this->db->query($sql) === true && $sql !== "" ) {
             echo "Data insert  successfully \r\n";
+            ?>
+                <script>window.location.href='<?php echo SITE_URL . "/"?>'</script>
+            <?php
         } else {
             $error = mysqli_error($this->db);
             $this->db->query("DELETE FROM " . $product_type . " WHERE " . $product_type . ".id = " . $maxId . ";");
@@ -203,47 +205,56 @@ class Model {
 
     }
 
+
+    public function massDelete() {
+        $arr = explode(",", array_pop($_GET));
+        foreach ($arr as $data) {
+            $type = array_values(explode(".", $data))[0];
+            $sku = array_values(explode(".", $data))[1];
+
+            if ($type === 'book') {
+                $sql = "SELECT all_products.id_book FROM all_products WHERE all_products.sku='" . $sku . "'";
+                $result = mysqli_query($this->db, $sql);
+                while ($row = $result->fetch_assoc()) {
+                    if (implode(", ", $row) !== null) {
+                        $id = implode(", ", $row);
+                        $this->db->query("DELETE FROM book WHERE book.id = '" . $id . "'");
+                        $this->db->query("DELETE FROM all_products WHERE all_products.sku='".$sku."'");
+                    }
+                }
+            }
+
+            if ($type === 'dvd') {
+                $sql = "SELECT all_products.id_dvd FROM all_products WHERE all_products.sku='" . $sku . "'";
+                $result = mysqli_query($this->db, $sql);
+                while ($row = $result->fetch_assoc()) {
+                    if (implode(", ", $row) !== null) {
+                        $id = implode(", ", $row);
+                        $this->db->query("DELETE FROM dvd WHERE dvd.id = '" . $id . "'");
+                        $this->db->query("DELETE FROM all_products WHERE all_products.sku='".$sku."'");
+                    }
+                }
+            }
+
+            if ($type === 'furniture') {
+                $sql = "SELECT all_products.id_furniture FROM all_products WHERE all_products.sku='" . $sku . "'";
+                $result = mysqli_query($this->db, $sql);
+                while ($row = $result->fetch_assoc()) {
+                    if (implode(", ", $row) !== null) {
+                        $id = implode(", ", $row);
+                        $this->db->query("DELETE FROM furniture WHERE furniture.id = '" . $id . "'");
+                        $this->db->query("DELETE FROM all_products WHERE all_products.sku='".$sku."'");
+                    }
+                }
+            }
+
+        }
+        ?>
+            <script>window.location.href='<?php echo SITE_URL . "/"?>'</script>
+        <?php
+    }
+
     public function getAll() {
-        //TODO
-
-//        SELECT dvd.sku, dvd.product_name, dvd.price, dvd.product_size,
-//                book.sku, book.product_name, book.price, book.weight,
-//                furniture.sku, furniture.product_name, furniture.price,
-//                furniture.height, furniture.width, furniture.product_length
-
-//        $sql = "
-//        SELECT sku
-//            FROM dvd
-//        UNION
-//        SELECT sku
-//            FROM book
-//        UNION
-//        SELECT sku
-//            FROM furniture
-//        order by sku;
-//        ";
-
-//        echo "<br>";
-//        $result = mysqli_query($this->db, $sql, MYSQLI_USE_RESULT);
-//        while ($row = $result->fetch_assoc()) {
-//            echo implode(", ", $row) . "<br>";
-//        }
-
-//        if ($this->db->query($sql) === true) {
-//            echo  "DONE\r\n";
-//        } else {
-//            echo "Error creating table: " . $this->db->error . "\r\n";
-//        }
-
-//        DROP VIEW IF EXISTS yourview;
-//
-//        CREATE VIEW yourview AS
-//            SELECT table1.column1,
-//            table2.column2
-//        FROM
-//        table1, table2
-//        WHERE table1.column1 = table2.column1;
-
         $sql = "SELECT 
                 all_products.sku, 
                 all_products.product_name, 
@@ -253,7 +264,7 @@ class Model {
                 dvd.product_size,
                 furniture.height,
                 furniture.width,
-                furniture.width
+                furniture.product_length
                 FROM all_products
                     LEFT JOIN book ON 
                         all_products.id_book = book.id
@@ -263,13 +274,6 @@ class Model {
                         all_products.id_furniture = furniture.id
                 ";
 
-        echo "<br>";
-        $result = mysqli_query($this->db, $sql);
-//        while ($row = $result->fetch_assoc()) {
-//            echo $row['product_type'];
-//            echo implode(", ", $row) . "<br>";
-//        }
-
-        return $result;
+        return mysqli_query($this->db, $sql);
     }
 }
