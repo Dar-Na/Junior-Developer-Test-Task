@@ -14,8 +14,9 @@ class Model {
             DB_USER,
             DB_PASSWORD,
             DB_NAME
-        ) or die("Connect failed: %s\n". $this -> db -> error);
+        );
 
+        mysqli_report(MYSQLI_REPORT_OFF);
         # id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         # sku VARCHAR(64) NOT NULL UNIQUE,
         # product_name VARCHAR(80) NOT NULL,
@@ -32,6 +33,7 @@ class Model {
         $this->isExistTable("furniture");
 
 //        $this->insertProduct('Jhasdo1', 'furniture for all', 214, 'furniture', null, null, 13, 42, 52);
+//        $this->insertProduct('JO12354', "good book", 423, 'book', 423);
     }
 
     private function createTable($table) {
@@ -102,21 +104,23 @@ class Model {
         $product_length = null
     ) {
         $sql = "";
+        $maxId = 0;
         if ($product_type === 'book') {
             $sql = "INSERT INTO book (weight) VALUES(" . $weight . ")";
             if ($this->db->query($sql) === true && $sql !== "" ) {
                 $sql = "SELECT MAX(id) FROM book";
                 $result = mysqli_query($this->db, $sql);
                 while ($row = $result->fetch_assoc()) {
-                    $sql = "INSERT INTO `all_products` 
-                            (`id`, 
-                             `sku`, 
-                             `product_name`, 
-                             `price`, 
-                             `product_type`, 
-                             `id_book`, 
-                             `id_dvd`, 
-                             `id_furniture`) 
+                    $maxId = (int)implode(", ", $row);
+                    $sql = "INSERT INTO `all_products`
+                            (`id`,
+                             `sku`,
+                             `product_name`,
+                             `price`,
+                             `product_type`,
+                             `id_book`,
+                             `id_dvd`,
+                             `id_furniture`)
                         VALUES (NULL, '"
                                 . $sku . "', '"
                                 . $product_name. "', '"
@@ -133,6 +137,7 @@ class Model {
                 $sql = "SELECT MAX(id) FROM dvd";
                 $result = mysqli_query($this->db, $sql);
                 while ($row = $result->fetch_assoc()) {
+                    $maxId = (int)implode(", ", $row);
                     $sql = "INSERT INTO `all_products` 
                             (`id`, 
                              `sku`, 
@@ -165,6 +170,7 @@ class Model {
                 $sql = "SELECT MAX(id) FROM furniture";
                 $result = mysqli_query($this->db, $sql);
                 while ($row = $result->fetch_assoc()) {
+                    $maxId = (int)implode(", ", $row);
                     $sql = "INSERT INTO `all_products` 
                             (`id`, 
                              `sku`, 
@@ -186,11 +192,13 @@ class Model {
             }
         }
 
-        if ($this->db->query($sql) === true && $sql !== "" ) {
 
+        if ($this->db->query($sql) === true && $sql !== "" ) {
             echo "Data insert  successfully \r\n";
         } else {
-            echo "Error creating table: " . $this->db->error . "\r\n";
+            $error = mysqli_error($this->db);
+            $this->db->query("DELETE FROM " . $product_type . " WHERE " . $product_type . ".id = " . $maxId . ";");
+            echo $error;
         }
 
     }
