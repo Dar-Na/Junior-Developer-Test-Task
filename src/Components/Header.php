@@ -1,9 +1,14 @@
 <?php
 
 namespace Components;
+
+use Core\Model;
+
 include_once "consts.php";
 
+
 class Header {
+
     public static function view() { ?>
         <head>
             <meta charset="UTF-8">
@@ -19,6 +24,7 @@ class Header {
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
             <script src="http://localhost/Junior-Developer-Test-Task/resources/scripts.js"></script>
         </head>
 
@@ -29,13 +35,37 @@ class Header {
                     <?php
                         if(SITE_URL . "/addproduct" === 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) {
                             ?>
-                                <button class="btn btn-outline-primary mx-1" type="submit">SAVE</button>
-                                <a href="<?php echo SITE_URL . "/" ?>" class="btn btn-danger mx-1" role="button">CANCEL</a>
+                                <button
+                                        class="btn btn-outline-primary mx-1"
+                                        type="submit"
+                                >
+                                    SAVE
+                                </button>
+                                <a
+                                        href="<?php echo SITE_URL . "/" ?>"
+                                        class="btn btn-danger mx-1"
+                                        role="button"
+                                >
+                                    CANCEL
+                                </a>
                             <?php
                         } else {
                             ?>
-                                <a href="<?php echo SITE_URL . "/addproduct" ?>" class="btn btn-outline-primary mx-2" role="button">ADD</a>
-                                <button class="btn btn-danger mx-1" type="submit">MASS DELETE</button>
+                                <a
+                                        href="<?php echo SITE_URL . "/addproduct" ?>"
+                                        class="btn btn-outline-primary mx-2"
+                                        role="button"
+                                >
+                                    ADD
+                                </a>
+                            <a
+                                    class="btn btn-danger mx-1"
+                                    role="button"
+                                    href="Header.php"
+                                    onclick="location.href=this.href+'?arrayToDel='+skuToDelete();return false;"
+                            >
+                                MASS DELETE
+                            </a>
                             <?php
                         }
                     ?>
@@ -45,4 +75,9 @@ class Header {
         <hr class="border border-1 opacity-100">
     <?php
     }
+}
+
+if (isset($_GET['arrayToDel'])) {
+    $m = new Model();
+    $m->massDelete();
 }
