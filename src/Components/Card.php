@@ -99,7 +99,7 @@ class Card {
                             <br>
                             <span class='card-text'>
                                 Dimension: "
-                                . (int)$arr['height'] . "x" . (int)$arr['weight'] . "x" . (int)$arr['product_length'] . " 
+                                . (float)$arr['height'] . "x" . (float)$arr['width'] . "x" . (float)$arr['product_length'] . " 
                             </span>
                             <br>
                         </div>
