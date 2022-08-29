@@ -2,10 +2,7 @@
 
 namespace Components;
 
-use Core\Model;
-
 include_once "consts.php";
-
 
 class Header {
 
@@ -36,8 +33,10 @@ class Header {
                         if(SITE_URL . "/addproduct" === 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) {
                             ?>
                                 <button
-                                        class="btn btn-outline-primary mx-1"
                                         type="submit"
+                                        form="product_form"
+                                        class="btn btn-outline-primary mx-1"
+                                        value="Submit"
                                 >
                                     SAVE
                                 </button>
@@ -75,9 +74,4 @@ class Header {
         <hr class="border border-1 opacity-100">
     <?php
     }
-}
-
-if (isset($_GET['arrayToDel'])) {
-    $m = new Model();
-    $m->massDelete();
 }

@@ -1,21 +1,14 @@
 <?php
 
 require 'autoloader.php';
-//require('db_connection.php');
 
+use Core\ControllerModel;
 use Core\Router;
 use Pages\HomePage;
 use Pages\AddProduct;
 use Components\Header;
 use Components\Footer;
 
-//$conn = OpenCon();
-//
-//echo "DB connect\n";
-//
-//CloseCon($conn);
-//
-//echo "DB connect\n";
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +32,22 @@ use Components\Footer;
             AddProduct::view();
         });
 
+        $route->post('/addproduct', function ($data) {
+            var_dump($data);
+            $class = '\Core\\' . $data['productType'] . 'Model';
+            $m = new $class($data);
+            $m->insertProduct();
+        });
+
+        if (isset($_GET['arrayToDel'])) {
+            $m = new ControllerModel();
+            $m -> massDelete();
+        }
+
         #FOOTER
         Footer::view();
 
         ?>
-
     </body>
 </html>
 
