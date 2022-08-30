@@ -24,15 +24,14 @@ class AddProduct {
                 <div class="mb-3 row">
                     <label for="price" class="col-sm-2 col-form-label">Price ($)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="price" class="form-control" id="price" placeholder="Please, provide price" required>
+                        <input type="number" name="price" class="form-control" id="price" placeholder="Please, provide price" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="productType" class="col-sm-2 col-form-label">Select product type</label>
                     <div class="col-sm-3">
-                        <select class="form-select" id="productType" name="productType" onchange="OnSelectionChange(this)">
-                            <option selected>Product type</option>
-                            <option value="Book">Book</option>
+                        <select class="form-select" id="productType" name="productType" onchange="OnSelectionChange()">
+                            <option value="Book" selected>Book</option>
                             <option value="Dvd">Dvd</option>
                             <option value="Furniture">Furniture</option>
                         </select>
@@ -50,26 +49,27 @@ class AddProduct {
                 document.product_form.reset();
             }
         
-            function OnSelectionChange(data) {
+            function OnSelectionChange() {
+                let data = document.getElementById("productType");
                 let doc = document.getElementById("productTypeVal");
                 let divF = `
                 <div id="furniture">
                     <div class="mb-3 row">
                         <label for="height" class="col-sm-2 col-form-label">Height (CM)</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="height" id="height" placeholder="Please, provide height" required>
+                            <input type="number" class="form-control" name="height" id="height" placeholder="Please, provide height" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="width" class="col-sm-2 col-form-label">Width (CM)</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="width" id="width" placeholder="Please, provide width" required>
+                            <input type="number" class="form-control" name="width" id="width" placeholder="Please, provide width" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="length" class="col-sm-2 col-form-label">Length (CM)</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="length" id="length" placeholder="Please, provide length" required>
+                            <input type="number" class="form-control" name="length" id="length" placeholder="Please, provide length" required>
                         </div>
                     </div>
                 </div>`;
@@ -78,7 +78,7 @@ class AddProduct {
                     <div class="mb-3 row">
                         <label for="weight" class="col-sm-2 col-form-label">Weight (KG)</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="weight" id="weight" placeholder="Please, provide weight" required>
+                            <input type="number" class="form-control" name="weight" id="weight" placeholder="Please, provide weight" required>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ class AddProduct {
                     <div class="mb-3 row">
                         <label for="size" class="col-sm-2 col-form-label">Size (MB)</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="size" id="size" placeholder="Please, provide size" required>
+                            <input type="number" class="form-control" name="size" id="size" placeholder="Please, provide size" required>
                         </div>
                     </div>
                 </div>
@@ -106,8 +106,9 @@ class AddProduct {
                 else {
                     doc.innerHTML = "";
                 }
-
             }
+            
+            OnSelectionChange();
         </script>
         ';
     }
