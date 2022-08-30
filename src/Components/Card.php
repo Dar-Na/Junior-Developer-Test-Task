@@ -13,7 +13,7 @@ class Card {
 
     private function viewBook($arr) {
         return "
-            <div class='col' style='max-width: 18rem;'>
+            <div class='col' style='max-width: 16rem;'>
                 <div class='card'>
                     <div class='card-body'>
                         <input class='form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;' onchange='changeClass(this.parentNode, this)'/> 
@@ -46,7 +46,7 @@ class Card {
 
     private function viewDvd($arr) {
         return "
-            <div class='col' style='max-width: 18rem;'>
+            <div class='col' style='max-width: 16rem;'>
                 <div class='card'>
                     <div class='card-body'>
                         <input class='form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;' onchange='changeClass(this.parentNode, this)'/> 
@@ -79,7 +79,7 @@ class Card {
 
     private function viewFurniture($arr) {
         return "
-            <div class='col' style='max-width: 18rem;'>
+            <div class='col' style='max-width: 16rem;'>
                 <div class='card'>
                     <div class='card-body'>
                         <input class='form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;' onchange='changeClass(this.parentNode, this)'/> 
