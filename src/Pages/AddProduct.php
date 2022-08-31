@@ -8,7 +8,7 @@ class AddProduct {
     public static function view() {
         echo '
         <div onload="ClearForm()" class="m-4">
-            <form id="product_form" class="needs-validation" action="' . SITE_URL . '/addproduct" method="post" novalidate>
+            <form id="product_form" action="' . SITE_URL . '/addproduct" class="needs-validation" method="post" novalidate>
                 <div class="mb-3 row">
                     <label for="sku" class="col-sm-2 col-form-label">SKU</label>
                     <div class="col-sm-3">
@@ -39,7 +39,7 @@ class AddProduct {
                     <label for="price" class="col-sm-2 col-form-label">Price ($)</label>
                     <div class="col-sm-3">
                         <input 
-                            type="number" 
+                            type="text" 
                             name="price" 
                             class="form-control" 
                             id="price" 
@@ -60,7 +60,7 @@ class AddProduct {
                             >
                             <option selected disabled value="">Choose type</option>
                             <option value="Book">Book</option>
-                            <option value="Dvd">Dvd</option>
+                            <option value="Dvd">DVD</option>
                             <option value="Furniture">Furniture</option>
                         </select>
                     </div>
@@ -68,12 +68,11 @@ class AddProduct {
                 <div id="productTypeVal">
                 
                 </div>
-                                
             </form>
             
         </div>
         <script>
-                    
+        
             function ClearForm(){
                 document.product_form.reset();
             }
@@ -87,7 +86,7 @@ class AddProduct {
                         <label for="height" class="col-sm-2 col-form-label">Height (CM)</label>
                         <div class="col-sm-3">
                             <input 
-                                type="number" 
+                                type="text" 
                                 class="form-control" 
                                 name="height" 
                                 id="height" 
@@ -100,7 +99,7 @@ class AddProduct {
                         <label for="width" class="col-sm-2 col-form-label">Width (CM)</label>
                         <div class="col-sm-3">
                             <input 
-                                type="number" 
+                                type="text" 
                                 class="form-control" 
                                 name="width" 
                                 id="width" 
@@ -113,7 +112,7 @@ class AddProduct {
                         <label for="length" class="col-sm-2 col-form-label">Length (CM)</label>
                         <div class="col-sm-3">
                             <input 
-                                type="number" 
+                                type="text" 
                                 class="form-control" 
                                 name="length" 
                                 id="length"
@@ -129,7 +128,7 @@ class AddProduct {
                         <label for="weight" class="col-sm-2 col-form-label">Weight (KG)</label>
                         <div class="col-sm-3">
                             <input 
-                                type="number" 
+                                type="text" 
                                 class="form-control" 
                                 name="weight" 
                                 id="weight" 
@@ -146,7 +145,7 @@ class AddProduct {
                         <label for="size" class="col-sm-2 col-form-label">Size (MB)</label>
                         <div class="col-sm-3">
                             <input 
-                                type="number" 
+                                type="text" 
                                 class="form-control" 
                                 name="size" id="size" 
                                 placeholder="Please, provide size" 
@@ -156,7 +155,6 @@ class AddProduct {
                     </div>
                 </div>
                 `;
-
 
                 if(data.value === "Furniture") {
                     doc.innerHTML = divF;
@@ -171,8 +169,7 @@ class AddProduct {
                     doc.innerHTML = "";
                 }
             }
-            
-                        
+
             (function () {
               "use strict"
             
@@ -192,7 +189,7 @@ class AddProduct {
                   }, false)
                 })
             })()
-            
+
             OnSelectionChange();
         </script>
         ';

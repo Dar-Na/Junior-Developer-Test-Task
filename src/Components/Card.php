@@ -16,25 +16,25 @@ class Card {
             <div class='col' style='max-width: 16rem;'>
                 <div class='card'>
                     <div class='card-body'>
-                        <input class='form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;' onchange='changeClass(this.parentNode, this)'/> 
+                        <input class='delete-checkbox form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;'/> 
                         <div class='card-text text-center' style='margin-top: -1rem;'> 
                             <span class='card-text " . $this->product_type . "'>"
-                                . $arr['sku'] .
-                            "</span>
+            . $arr['sku'] .
+            "</span>
                             <br>
                             <span class='card-text'>"
-                                . $arr['product_name'] .
-                            "</span>
+            . $arr['product_name'] .
+            "</span>
                             <br>
                             <span class='card-text'>"
-                                . number_format((float)$arr['price'], 2, '.', '') .
-                                " $ 
+            . number_format((float)$arr['price'], 2, '.', '') .
+            " $ 
                             </span>
                             <br>
                             <span class='card-text'>
                                 Weight: "
-                                . number_format((float)$arr['weight'], 1, '.', '') .
-                                " KG 
+            . number_format((float)$arr['weight'], 1, '.', '') .
+            " KG 
                             </span>
                             <br>
                         </div>
@@ -49,25 +49,25 @@ class Card {
             <div class='col' style='max-width: 16rem;'>
                 <div class='card'>
                     <div class='card-body'>
-                        <input class='form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;' onchange='changeClass(this.parentNode, this)'/> 
+                        <input class='delete-checkbox form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;'/> 
                         <div class='card-text text-center' style='margin-top: -1rem;'> 
                              <span class='card-text " . $this->product_type . "'>"
-                                . $arr['sku'] .
-                            "</span>
+            . $arr['sku'] .
+            "</span>
                             <br>
                             <span class='card-text'>"
-                                . $arr['product_name'] .
-                            "</span>
+            . $arr['product_name'] .
+            "</span>
                             <br>
                             <span class='card-text'>"
-                                . number_format((float)$arr['price'], 2, '.', '') .
-                                " $ 
+            . number_format((float)$arr['price'], 2, '.', '') .
+            " $ 
                             </span>
                             <br>
                             <span class='card-text'>
                                 Size: "
-                                . number_format((float)$arr['product_size'], 1, '.', '') .
-                                " MB 
+            . number_format((float)$arr['product_size'], 1, '.', '') .
+            " MB 
                             </span>
                             <br>
                         </div>
@@ -82,24 +82,24 @@ class Card {
             <div class='col' style='max-width: 16rem;'>
                 <div class='card'>
                     <div class='card-body'>
-                        <input class='form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;' onchange='changeClass(this.parentNode, this)'/> 
+                        <input class='delete-checkbox form-check-input' type='checkbox' style='margin-top: -0.5rem; margin-left: -0.5rem;'/> 
                         <div class='card-text text-center' style='margin-top: -1rem;'> 
                              <span class='card-text " . $this->product_type . "'>"
-                                . $arr['sku'] .
-                            "</span>
+            . $arr['sku'] .
+            "</span>
                             <br>
                             <span class='card-text'>"
-                                . $arr['product_name'] .
-                            "</span>
+            . $arr['product_name'] .
+            "</span>
                             <br>
                             <span class='card-text'>"
-                                . number_format((float)$arr['price'], 2, '.', '') .
-                                " $ 
+            . number_format((float)$arr['price'], 2, '.', '') .
+            " $ 
                             </span>
                             <br>
                             <span class='card-text'>
                                 Dimension: "
-                                . (float)$arr['height'] . "x" . (float)$arr['width'] . "x" . (float)$arr['product_length'] . " 
+            . (float)$arr['height'] . "x" . (float)$arr['width'] . "x" . (float)$arr['product_length'] . " 
                             </span>
                             <br>
                         </div>
