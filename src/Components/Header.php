@@ -22,7 +22,23 @@ class Header {
             <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-            <script src="http://localhost/Junior-Developer-Test-Task/resources/scripts.js"></script>
+            <script>
+                function skuToDelete() {
+                    let arrayToDelete = [];
+
+                    let dataAll = document.querySelectorAll(".delete-checkbox");
+                    dataAll.forEach(d => {
+                        if (d.checked) {
+                            arrayToDelete.push( d.parentElement.childNodes[3].childNodes[1].classList[1] + "." + d.parentElement.childNodes[3].childNodes[1].textContent);
+                        }
+                    })
+
+                    let str = arrayToDelete.join(',');
+                    console.log(arrayToDelete.join(','));
+                    return str;
+                }
+
+            </script>
         </head>
 
         <nav class="navbar">
@@ -30,48 +46,49 @@ class Header {
                 <a class="navbar-brand mx-1 fw-semibold fs-3">Product List</a>
                 <div class="d-flex">
                     <?php
-                        if(SITE_URL . "/addproduct" === 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) {
-                            ?>
-                                <button
-                                        type="submit"
-                                        form="product_form"
-                                        class="btn btn-outline-primary mx-1"
-                                        value="Submit"
-                                >
-                                    SAVE
-                                </button>
-                                <a
-                                        href="<?php echo SITE_URL . "/" ?>"
-                                        class="btn btn-danger mx-1"
-                                        role="button"
-                                >
-                                    CANCEL
-                                </a>
-                            <?php
-                        } else {
-                            ?>
-                                <a
-                                        href="<?php echo SITE_URL . "/addproduct" ?>"
-                                        class="btn btn-outline-primary mx-2"
-                                        role="button"
-                                >
-                                    ADD
-                                </a>
-                            <a
-                                    class="btn btn-danger mx-1"
-                                    role="button"
-                                    href="Header.php"
-                                    onclick="location.href=this.href+'?arrayToDel='+skuToDelete();return false;"
-                            >
-                                MASS DELETE
-                            </a>
-                            <?php
-                        }
+                    if(SITE_URL . "/addproduct" === 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) {
+                        ?>
+                        <button
+                                type="submit"
+                                form="product_form"
+                                class="btn btn-outline-primary mx-1"
+                                value="Submit"
+                        >
+                            Save
+                        </button>
+                        <a
+                                href="<?php echo SITE_URL . "/" ?>"
+                                class="btn btn-danger mx-1"
+                                role="button"
+                        >
+                            Cancel
+                        </a>
+                        <?php
+                    } else {
+                        ?>
+                        <a
+                                href="<?php echo SITE_URL . "/addproduct" ?>"
+                                class="btn btn-outline-primary mx-2"
+                                role="button"
+                        >
+                            ADD
+                        </a>
+                        <button
+                                class="btn btn-danger mx-1"
+                                id="delete-product-btn"
+                                role="button"
+                                href="Header.php"
+                                onclick="window.location.href=this.href+'?arrayToDel='+skuToDelete();return false;"
+                        >
+                            MASS DELETE
+                        </button>
+                        <?php
+                    }
                     ?>
                 </div>
             </div>
         </nav>
         <hr class="border border-1 opacity-100">
-    <?php
+        <?php
     }
 }

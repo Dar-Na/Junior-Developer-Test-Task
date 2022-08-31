@@ -33,7 +33,6 @@ use Components\Footer;
         });
 
         $route->post('/addproduct', function ($data) {
-            var_dump($data);
             $class = '\Core\\' . $data['productType'] . 'Model';
             $m = new $class($data);
             $m->insertProduct();
@@ -50,4 +49,3 @@ use Components\Footer;
         ?>
     </body>
 </html>
-

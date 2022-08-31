@@ -1,19 +1,19 @@
 function changeClass(node, input) {
     if (input.checked) {
-        node.classList.add("delete-checkbox")
+        node.classList.add("checkboxToDelete")
     } else {
-        node.classList.remove("delete-checkbox")
+        node.classList.remove("checkboxToDelete")
     }
 }
 
 function skuToDelete() {
-    let data = document.querySelectorAll(".delete-checkbox");
+    let data = document.querySelectorAll(".checkboxToDelete");
+    console.log(data);
     let arrayToDelete = [];
     data.forEach(d => {
+        console.log(data);
         arrayToDelete.push( d.childNodes[3].childNodes[1].classList[1] + "." + d.childNodes[3].childNodes[1].textContent);
     })
 
-    let str = arrayToDelete.join(',');
-    console.log(arrayToDelete.join(','));
-    return str;
+    return arrayToDelete.join(',');
 }

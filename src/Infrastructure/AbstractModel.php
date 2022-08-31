@@ -23,7 +23,8 @@ abstract class AbstractModel {
             DB_NAME
         );
 
-        mysqli_report(MYSQLI_REPORT_OFF);
+
+        //mysqli_report(MYSQLI_REPORT_OFF);
     }
 
     public function setSku($sku) {
