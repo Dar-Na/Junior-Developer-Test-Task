@@ -12,7 +12,7 @@ use Components\Footer;
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
     <body class="mt-4 border-0 bd-example m-5">
 
@@ -20,7 +20,7 @@ use Components\Footer;
         <?php
 
         #HEADER
-        Header::view();
+        (new Components\Header)->view();
 
         $route = new Router();
 
@@ -44,7 +44,7 @@ use Components\Footer;
         }
 
         #FOOTER
-        Footer::view();
+        (new Components\Footer)->view();
 
         ?>
     </body>

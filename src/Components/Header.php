@@ -2,11 +2,12 @@
 
 namespace Components;
 
+use Infrastructure\AbstractComponent;
+
 include_once "consts.php";
 
-class Header {
-
-    public static function view() { ?>
+class Header extends AbstractComponent {
+    public function view() { ?>
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">

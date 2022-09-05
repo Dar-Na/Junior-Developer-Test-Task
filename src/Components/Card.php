@@ -2,7 +2,9 @@
 
 namespace Components;
 
-class Card {
+use Infrastructure\AbstractComponent;
+
+class Card extends AbstractComponent {
     private $product_type;
     private $data;
 
