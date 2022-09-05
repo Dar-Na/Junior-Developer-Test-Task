@@ -6,6 +6,17 @@ use Infrastructure\AbstractModel;
 
 class ControllerModel extends AbstractModel
 {
+    public function isUniqueSku($sku) {
+        $sql = "SELECT all_products.product_name FROM all_products WHERE all_products.sku='" . $sku . "';";
+
+        if ($res = $this->db->query($sql)) {
+            if ($res->num_rows !== 1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
 
     protected function createTable($table) { }
 

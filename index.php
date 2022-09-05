@@ -38,6 +38,12 @@ use Components\Footer;
             $m->insertProduct();
         });
 
+        $route->post('/validate', function ($data) {
+            $res = (new Core\ControllerModel)->isUniqueSku($data['sku']);
+            echo json_encode(array("isExist" => $res));
+            //echo json_encode(array($data['sku']));
+        });
+
         if (isset($_GET['arrayToDel'])) {
             $m = new ControllerModel();
             $m -> massDelete();
