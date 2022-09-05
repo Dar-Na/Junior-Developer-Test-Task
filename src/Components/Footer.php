@@ -2,8 +2,10 @@
 
 namespace Components;
 
-class Footer {
-    public static function view() {
+use Infrastructure\AbstractComponent;
+
+class Footer extends AbstractComponent {
+    public function view() {
         ?>
             <footer class="mt-4">
                 <hr class="border border-1 opacity-100">
