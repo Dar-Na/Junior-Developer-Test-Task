@@ -214,6 +214,8 @@ class AddProduct {
             }
             
             $("#sku").change(function(e) {
+                let field = $("#sku");
+                
                 $.ajax({
                     type: "POST",
                     url: "' . SITE_URL . '/validate",
@@ -222,13 +224,13 @@ class AddProduct {
                        let ind = res.search("isExist");
                        let str = JSON.parse(res.substring(ind-2, ind+15));
                        if (str.isExist === true || !document.forms["product_form"]["sku"].value) {
-                           $("#sku")[0].classList.remove("is-valid")
-                           $("#sku")[0].classList.add("is-invalid")
+                           field[0].classList.remove("is-valid")
+                           field[0].classList.add("is-invalid")
                            document.getElementById("invalidFeedBack").innerHTML = 
                             "Please, write unique SKU.";
                        } else {
-                           $("#sku")[0].classList.remove("is-invalid")
-                           $("#sku")[0].classList.add("is-valid")
+                           field[0].classList.remove("is-invalid")
+                           field[0].classList.add("is-valid")
                            document.getElementById("invalidFeedBack").innerHTML = "";
                        }
                     },
@@ -251,9 +253,6 @@ class AddProduct {
             
             $("#product_form").submit(function (e) {
                 $("#sku").trigger("change");
-//                $("#name").trigger("change");
-//                $("#price").trigger("change");
-//                $("#productType").trigger("change");
                 
                 let inputs = document.querySelectorAll("input");
                 for(let i = 0; i < inputs.length; i++) {
