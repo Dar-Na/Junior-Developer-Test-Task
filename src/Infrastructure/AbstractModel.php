@@ -2,30 +2,10 @@
 
 namespace Infrastructure;
 
-include_once "consts.php";
-
 abstract class AbstractModel {
-
-    protected $db;
     protected $sku;
     protected $product_name;
     protected $price;
-
-    public function __construct() {
-        $this->connect();
-    }
-
-    public function connect() {
-        $this->db = new \mysqli(
-            DB_HOST,
-            DB_USER,
-            DB_PASSWORD,
-            DB_NAME
-        );
-
-
-        //mysqli_report(MYSQLI_REPORT_OFF);
-    }
 
     public function setSku($sku) {
         $this->sku = $sku;
@@ -51,18 +31,7 @@ abstract class AbstractModel {
         return $this->price;
     }
 
-    protected function isExistTable($table) {
-        if ($res = $this->db->query("SHOW TABLES LIKE '" . $table . "'")) {
-            if ($res->num_rows !== 1) {
-                $this->createTable($table);
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
+    abstract public function getAllProperties();
+    abstract public function getAllValues();
 
-    abstract protected function createTable($table);
-    abstract public function insertProduct();
-    abstract public function deleteProduct($sku);
 }

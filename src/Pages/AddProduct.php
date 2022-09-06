@@ -5,8 +5,6 @@ namespace Pages;
 include_once "consts.php";
 
 class AddProduct {
-    //            <form id="product_form" action="' . SITE_URL . '/addproduct" class="needs-validation" method="post" novalidate>
-
     public static function view() {
         echo '
         <div onload="ClearForm()" class="m-4">

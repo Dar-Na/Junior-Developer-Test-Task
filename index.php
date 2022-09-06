@@ -20,7 +20,9 @@ use Components\Footer;
         <?php
 
         #HEADER
-        (new Components\Header)->view();
+        (new Header)->view();
+
+        $controller = new ControllerModel();
 
         $route = new Router();
 
@@ -32,25 +34,27 @@ use Components\Footer;
             AddProduct::view();
         });
 
-        $route->post('/addproduct', function ($data) {
+        $route->post('/addproduct', function ($data) use ($controller) {
             $class = '\Core\\' . $data['productType'] . 'Model';
             $m = new $class($data);
-            $m->insertProduct();
+            $controller->insertProduct(
+                    $data['productType'],
+                    $m->getAllProperties(),
+                    $m->getAllValues()
+            );
         });
 
-        $route->post('/validate', function ($data) {
-            $res = (new Core\ControllerModel)->isUniqueSku($data['sku']);
+        $route->post('/validate', function ($data) use ($controller) {
+            $res = $controller->isUniqueSku($data['sku']);
             echo json_encode(array("isExist" => $res));
-            //echo json_encode(array($data['sku']));
         });
 
         if (isset($_GET['arrayToDel'])) {
-            $m = new ControllerModel();
-            $m -> massDelete();
+            $controller -> massDelete();
         }
 
         #FOOTER
-        (new Components\Footer)->view();
+        (new Footer)->view();
 
         ?>
     </body>
